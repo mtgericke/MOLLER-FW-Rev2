@@ -292,11 +292,10 @@ IBUFDS diff_lvds_nim1       (	.O(nim_input[1]),	    .I(LVDS_NIM_P[1]),      .IB(
 IBUFDS diff_clnr_osc        (	.O(clnr_osc),	        .I(CLNR_OSC_P),         .IB(CLNR_OSC_N) );        // 100 MHz VCXO
 IBUFDS diff_fpga_250_td     (	.O(fpga_clk250_td),	    .I(FPGA_CLK250_TD_P),   .IB(FPGA_CLK250_TD_N) );  // Cleaner CLK_OUT10
 
-assign EXT_LVDS_OUT_P = EXT_LVDS_IN_P;
-assign EXT_LVDS_OUT_N = EXT_LVDS_IN_N;
-//IBUFDS diff_ext_lvds_in     (	.O(ext_lvds_in),	    .I(EXT_LVDS_IN_P),      .IB(EXT_LVDS_IN_N) );     // LVDS 2.5 voltage
-//OBUFDS diff_ext_lvds_out    (	.I(ext_lvds_out),	    .O(EXT_LVDS_OUT_P),     .OB(EXT_LVDS_OUT_N) );    // LVDS 2.5 voltage
-// assign ext_lvds_out = ext_lvds_in;
+IBUFDS diff_ext_lvds_in     (	.O(ext_lvds_in),	    .I(EXT_LVDS_IN_P),      .IB(EXT_LVDS_IN_N) );
+OBUFDS diff_ext_lvds_out    (	.I(ext_lvds_out),	    .O(EXT_LVDS_OUT_P),     .OB(EXT_LVDS_OUT_N) );
+
+assignb ext_lvds_out = ext_lvds_in;
 
 subsystem_clock clock_subsystem (
     .clk_osc_125( clnr_osc ), // oscillator 100MHz
