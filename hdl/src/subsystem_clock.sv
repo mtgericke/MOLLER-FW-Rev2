@@ -50,16 +50,16 @@ assign rst_out_250 = rst_250;
 
 // LMK04816 Clock cleaner configuration
 assign uwire_cfg_data = {
-    32'h80160140, // CLK 0/1 (250MHz for TI)
-    32'h00140280, // CLK 0/1 ()
-    32'h00141901, // CLK 2/3 ()
-    32'h00140202, // CLK 4/5  (MGT B229/230 REFCLKs, 156.25)
+    32'h00160140, // CLK 0/1 (250MHz for TI)
+    32'h00140140, // CLK 0/1 (out of reset)
+    32'h80140281, // CLK 2/3 (Powered Down,  SOM IN (currently unused) set to 125MHz
+    32'h00140282, // CLK 4/5  (MGT B229/230 REFCLKs, 125 MHz)
     32'h00140283, // CLK 6/7  (MGT B228/ REP OUT, 125)
-    32'h00140284, // CLK 8/9  (CLKB / CLKA 125
-    32'h00140145, // CLK 10/11 (250 MHz for TI)
-    32'h00000006, // Disabling CLK 3/2/1/0. Originally: 32'h11110006
-    32'h11110007,
-    32'h11000008, // Disabling CLK 9/8. Orignally 32'h11110008
+    32'h00140284, // CLK 8/9  SMA_CLK_OUT1 (125 MHz)
+    32'h00140145, // CLK 10/11 SMA_CLK_OUT0, 250 MHz
+    32'h11110006, // Clock Types (LVDS) and Delay
+    32'h01110007, // Disabling Clock 7
+    32'h01010008, // Disabling Clock 11 and 9
     32'h55555549,
     32'h914249AA,
     32'h1403000B,

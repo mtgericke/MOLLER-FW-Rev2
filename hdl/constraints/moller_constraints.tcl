@@ -55,10 +55,10 @@ set_property -dict {PACKAGE_PIN H14 IOSTANDARD LVCMOS33} [get_ports {LED_DSP[1]}
 set_property -dict {PACKAGE_PIN H13 IOSTANDARD LVCMOS33} [get_ports {LED_DSP[0]}]
 
 # Incompatible with normal LVDS, in HD bank
-set_property -dict {PACKAGE_PIN G10 IOSTANDARD LVCMOS25} [get_ports {EXT_LVDS_IN_P}]
-set_property -dict {PACKAGE_PIN F10 IOSTANDARD LVCMOS25} [get_ports {EXT_LVDS_IN_N}]
-set_property -dict {PACKAGE_PIN H12 IOSTANDARD LVCMOS25} [get_ports {EXT_LVDS_OUT_P}]
-set_property -dict {PACKAGE_PIN G11 IOSTANDARD LVCMOS25} [get_ports {EXT_LVDS_OUT_N}]
+set_property -dict {PACKAGE_PIN AJ5 IOSTANDARD IOSTANDARD LVDS DIFF_TERM_ADV TERM_100} [get_ports {EXT_LVDS_IN_P}]
+set_property -dict {PACKAGE_PIN AK5 IOSTANDARD IOSTANDARD LVDS DIFF_TERM_ADV TERM_100} [get_ports {EXT_LVDS_IN_N}]
+set_property -dict {PACKAGE_PIN AF6 IOSTANDARD IOSTANDARD LVDS} [get_ports {EXT_LVDS_OUT_P}]
+set_property -dict {PACKAGE_PIN AF5 IOSTANDARD IOSTANDARD LVDS} [get_ports {EXT_LVDS_OUT_N}]
 
 set_property -dict {PACKAGE_PIN G13 IOSTANDARD LVCMOS33} [get_ports {TTL_INPUT[0]}]
 set_property -dict {PACKAGE_PIN F13 IOSTANDARD LVCMOS33} [get_ports {TTL_INPUT[1]}]
@@ -77,7 +77,7 @@ set_property -dict {PACKAGE_PIN K12 IOSTANDARD LVCMOS25} [get_ports {SEL_TI_MGTn
 set_property -dict {PACKAGE_PIN AH11 IOSTANDARD LVCMOS18} [get_ports {ADC_PDn}]
 
 set_property -dict {PACKAGE_PIN J10 IOSTANDARD LVCMOS25} [get_ports {ADC_CNVT_SEL}]
-set_property -dict {PACKAGE_PIN J11 IOSTANDARD LVCMOS25} [get_ports {TACH1}]
+set_property -dict {PACKAGE_PIN AJ1 IOSTANDARD LVCMOS25} [get_ports {TACH1}]
 set_property -dict {PACKAGE_PIN H11 IOSTANDARD LVCMOS25} [get_ports {TACH2}]
 set_property -dict {PACKAGE_PIN J12 IOSTANDARD LVCMOS25} [get_ports {TACH3}]
 
