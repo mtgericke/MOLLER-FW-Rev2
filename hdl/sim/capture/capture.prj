@@ -1,0 +1,4 @@
+verilog xil_defaultlib "${XILINX_VIVADO}/data/verilog/src/glbl.v"
+sv xil_defaultlib "../../src/util/simple_packetizer.sv"
+sv xil_defaultlib "../../src/subsystem_capture.sv"
+sv xil_defaultlib "tb_capture.sv"

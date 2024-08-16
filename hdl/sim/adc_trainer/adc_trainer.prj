@@ -1,0 +1,5 @@
+sv xil_defaultlib "../../src/adc_trainer.sv"
+sv xil_defaultlib "../../src/util/pos_finder.sv"
+sv xil_defaultlib "../../src/util/simple_packetizer.sv"
+sv xil_defaultlib "tb_adc_trainer.sv"
+verilog xil_defaultlib "${XILINX_VIVADO}/data/verilog/src/glbl.v"

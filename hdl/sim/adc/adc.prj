@@ -1,0 +1,5 @@
+sv xil_defaultlib "../../src/adc_ts_fifo/adc_ts_fifo_sim_netlist.v"
+sv xil_defaultlib "../../src/ltc2387_deserializer.sv"
+sv xil_defaultlib "emulate_ltc2387_18.sv"
+sv xil_defaultlib "tb_adc.sv"
+verilog xil_defaultlib "${XILINX_VIVADO}/data/verilog/src/glbl.v"

@@ -1,0 +1,3 @@
+sv xil_defaultlib "../../src/simple_packetizer.sv"
+sv xil_defaultlib "tb_packetizer.sv"
+verilog xil_defaultlib "/home/xil/tools/xilinx/Vivado/2020.1/data/verilog/src/glbl.v"
