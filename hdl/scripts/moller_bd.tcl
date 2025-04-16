@@ -225,7 +225,7 @@ proc create_root_design { parentCell } {
    CONFIG.TUSER_WIDTH {0} \
    ] $run_fifo
 
-  set sfp_gem [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:sgmii_rtl:1.0 sfp_gem ]
+  set sfp_gem [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:sfp_rtl:1.0 sfp_gem ]
 
   set sfp_refclk [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:diff_clock_rtl:1.0 sfp_refclk ]
   set_property -dict [ list \
@@ -305,7 +305,7 @@ proc create_root_design { parentCell } {
   # Create instance: an_adv_cfg, and set properties
   set an_adv_cfg [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 an_adv_cfg ]
   set_property -dict [ list \
-   CONFIG.CONST_VAL {55297} \
+   CONFIG.CONST_VAL {32} \
    CONFIG.CONST_WIDTH {16} \
  ] $an_adv_cfg
 
@@ -344,10 +344,10 @@ proc create_root_design { parentCell } {
    CONFIG.Ext_Management_Interface {false} \
    CONFIG.GT_Location {X1Y4} \
    CONFIG.GTinEx {false} \
-   CONFIG.RefClkRate {125} \
+   CONFIG.RefClkRate {156.25} \
    CONFIG.RxGmiiClkSrc {TXOUTCLK} \
    CONFIG.SGMII_PHY_Mode {true} \
-   CONFIG.Standard {SGMII} \
+   CONFIG.Standard {1000BASEX} \
    CONFIG.SupportLevel {Include_Shared_Logic_in_Core} \
    CONFIG.TransceiverControl {true} \
  ] $gig_ethernet_pcs_pma_0
@@ -449,7 +449,6 @@ proc create_root_design { parentCell } {
   set_property -dict [ list \
    CONFIG.C_OPERATION {or} \
    CONFIG.C_SIZE {1} \
-   CONFIG.LOGO_FILE {data/sym_orgate.png} \
  ] $util_vector_logic_1
 
   # Create instance: xlconstant_0, and set properties
@@ -468,7 +467,7 @@ proc create_root_design { parentCell } {
   # Create instance: zero, and set properties
   set zero [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 zero ]
   set_property -dict [ list \
-   CONFIG.CONST_VAL {0x00} \
+   CONFIG.CONST_VAL {0} \
    CONFIG.CONST_WIDTH {1} \
  ] $zero
 
@@ -728,7 +727,7 @@ proc create_root_design { parentCell } {
    CONFIG.PSU_MIO_44_POLARITY {Default} \
    CONFIG.PSU_MIO_44_PULLUPDOWN {disable} \
    CONFIG.PSU_MIO_44_SLEW {fast} \
-   CONFIG.PSU_MIO_45_DIRECTION {in} \
+   CONFIG.PSU_MIO_45_DIRECTION {inout} \
    CONFIG.PSU_MIO_45_DRIVE_STRENGTH {12} \
    CONFIG.PSU_MIO_45_INPUT_TYPE {cmos} \
    CONFIG.PSU_MIO_45_POLARITY {Default} \
@@ -995,12 +994,12 @@ proc create_root_design { parentCell } {
      Flash#Quad SPI \
      Flash#Quad SPI \
      Flash#Quad SPI \
-     MIO#GPIO1 MIO#GPIO1 \
-     MIO#GPIO1 MIO#GPIO1 \
-     MIO#SD 1#SD \
+     MIO#GPIO1 MIO#SD \
+     MIO#GPIO1 MIO#SD \
+     MIO#GPIO1 MIO#SD \
      Quad SPI \
    } \
-   CONFIG.PSU_MIO_TREE_SIGNALS {sclk_out#miso_mo1#mo2#mo3#mosi_mi0#n_ss_out#clk_for_lpbk####scl_out#sda_out##sdio0_data_out[0]#sdio0_data_out[1]#sdio0_data_out[2]#sdio0_data_out[3]#sdio0_data_out[4]#sdio0_data_out[5]#sdio0_data_out[6]#sdio0_data_out[7]#sdio0_cmd_out#sdio0_clk_out####rgmii_tx_clk#rgmii_txd[0]#rgmii_txd[1]#rgmii_txd[2]#rgmii_txd[3]#rgmii_tx_ctl#rgmii_rx_clk#rgmii_rxd[0]#rgmii_rxd[1]#rgmii_rxd[2]#rgmii_rxd[3]#rgmii_rx_ctl#rxd#txd#gpio1[40]#gpio1[41]#gpio1[42]#gpio1[43]#gpio1[44]#sdio1_cd_n#sdio1_data_out[0]#sdio1_data_out[1]#sdio1_data_out[2]#sdio1_data_out[3]#sdio1_cmd_out#sdio1_clk_out#ulpi_clk_in#ulpi_dir#ulpi_tx_data[2]#ulpi_nxt#ulpi_tx_data[0]#ulpi_tx_data[1]#ulpi_stp#ulpi_tx_data[3]#ulpi_tx_data[4]#ulpi_tx_data[5]#ulpi_tx_data[6]#ulpi_tx_data[7]#rgmii_tx_clk#rgmii_txd[0]#rgmii_txd[1]#rgmii_txd[2]#rgmii_txd[3]#rgmii_tx_ctl#rgmii_rx_clk#rgmii_rxd[0]#rgmii_rxd[1]#rgmii_rxd[2]#rgmii_rxd[3]#rgmii_rx_ctl#gem0_mdc#gem0_mdio_out} \
+   CONFIG.PSU_MIO_TREE_SIGNALS {sclk_out#miso_mo1#mo2#mo3#mosi_mi0#n_ss_out#clk_for_lpbk####scl_out#sda_out##sdio0_data_out[0]#sdio0_data_out[1]#sdio0_data_out[2]#sdio0_data_out[3]#sdio0_data_out[4]#sdio0_data_out[5]#sdio0_data_out[6]#sdio0_data_out[7]#sdio0_cmd_out#sdio0_clk_out####rgmii_tx_clk#rgmii_txd[0]#rgmii_txd[1]#rgmii_txd[2]#rgmii_txd[3]#rgmii_tx_ctl#rgmii_rx_clk#rgmii_rxd[0]#rgmii_rxd[1]#rgmii_rxd[2]#rgmii_rxd[3]#rgmii_rx_ctl#rxd#txd#gpio1[40]#gpio1[41]#gpio1[42]#gpio1[43]#gpio1[44]#gpio1[45]#sdio1_data_out[0]#sdio1_data_out[1]#sdio1_data_out[2]#sdio1_data_out[3]#sdio1_cmd_out#sdio1_clk_out#ulpi_clk_in#ulpi_dir#ulpi_tx_data[2]#ulpi_nxt#ulpi_tx_data[0]#ulpi_tx_data[1]#ulpi_stp#ulpi_tx_data[3]#ulpi_tx_data[4]#ulpi_tx_data[5]#ulpi_tx_data[6]#ulpi_tx_data[7]#rgmii_tx_clk#rgmii_txd[0]#rgmii_txd[1]#rgmii_txd[2]#rgmii_txd[3]#rgmii_tx_ctl#rgmii_rx_clk#rgmii_rxd[0]#rgmii_rxd[1]#rgmii_rxd[2]#rgmii_rxd[3]#rgmii_rx_ctl#gem0_mdc#gem0_mdio_out} \
    CONFIG.PSU_SD0_INTERNAL_BUS_WIDTH {8} \
    CONFIG.PSU_SD1_INTERNAL_BUS_WIDTH {4} \
    CONFIG.PSU_SMC_CYCLE_T0 {NA} \
@@ -1261,10 +1260,10 @@ proc create_root_design { parentCell } {
    CONFIG.PSU__CRL_APB__PCAP_CTRL__DIVISOR0 {8} \
    CONFIG.PSU__CRL_APB__PCAP_CTRL__FREQMHZ {200} \
    CONFIG.PSU__CRL_APB__PCAP_CTRL__SRCSEL {IOPLL} \
-   CONFIG.PSU__CRL_APB__PL0_REF_CTRL__ACT_FREQMHZ {249.997498} \
-   CONFIG.PSU__CRL_APB__PL0_REF_CTRL__DIVISOR0 {6} \
+   CONFIG.PSU__CRL_APB__PL0_REF_CTRL__ACT_FREQMHZ {124.998749} \
+   CONFIG.PSU__CRL_APB__PL0_REF_CTRL__DIVISOR0 {12} \
    CONFIG.PSU__CRL_APB__PL0_REF_CTRL__DIVISOR1 {1} \
-   CONFIG.PSU__CRL_APB__PL0_REF_CTRL__FREQMHZ {250} \
+   CONFIG.PSU__CRL_APB__PL0_REF_CTRL__FREQMHZ {125} \
    CONFIG.PSU__CRL_APB__PL0_REF_CTRL__SRCSEL {IOPLL} \
    CONFIG.PSU__CRL_APB__PL1_REF_CTRL__ACT_FREQMHZ {49.999500} \
    CONFIG.PSU__CRL_APB__PL1_REF_CTRL__DIVISOR0 {30} \
@@ -1482,9 +1481,7 @@ proc create_root_design { parentCell } {
    CONFIG.PSU__ENET0__TSU__ENABLE {0} \
    CONFIG.PSU__ENET1__FIFO__ENABLE {0} \
    CONFIG.PSU__ENET1__GRP_MDIO__ENABLE {0} \
-   CONFIG.PSU__ENET1__GRP_MDIO__IO {<Select>} \
    CONFIG.PSU__ENET1__PERIPHERAL__ENABLE {0} \
-   CONFIG.PSU__ENET1__PERIPHERAL__IO {<Select>} \
    CONFIG.PSU__ENET1__PTP__ENABLE {0} \
    CONFIG.PSU__ENET1__TSU__ENABLE {0} \
    CONFIG.PSU__ENET2__FIFO__ENABLE {0} \
@@ -1818,7 +1815,6 @@ proc create_root_design { parentCell } {
    CONFIG.PSU__SD1_ROUTE_THROUGH_FPD {0} \
    CONFIG.PSU__SD1__DATA_TRANSFER_MODE {4Bit} \
    CONFIG.PSU__SD1__GRP_CD__ENABLE {0} \
-   CONFIG.PSU__SD1__GRP_CD__IO {<Select>} \
    CONFIG.PSU__SD1__GRP_POW__ENABLE {0} \
    CONFIG.PSU__SD1__GRP_WP__ENABLE {0} \
    CONFIG.PSU__SD1__PERIPHERAL__ENABLE {1} \
@@ -1959,7 +1955,7 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net adc_fifo_M_AXIS [get_bd_intf_pins adc_fifo/M_AXIS] [get_bd_intf_pins packet_switch/S01_AXIS]
   connect_bd_intf_net -intf_net axi_dma_0_M_AXI_S2MM [get_bd_intf_pins axi_dma_0/M_AXI_S2MM] [get_bd_intf_pins smartconnect_2/S00_AXI]
   connect_bd_intf_net -intf_net axi_dma_0_M_AXI_SG [get_bd_intf_pins axi_dma_0/M_AXI_SG] [get_bd_intf_pins smartconnect_2/S01_AXI]
-  connect_bd_intf_net -intf_net gig_ethernet_pcs_pma_0_sgmii [get_bd_intf_ports sfp_gem] [get_bd_intf_pins gig_ethernet_pcs_pma_0/sgmii]
+  connect_bd_intf_net -intf_net gig_ethernet_pcs_pma_0_sfp [get_bd_intf_ports sfp_gem] [get_bd_intf_pins gig_ethernet_pcs_pma_0/sfp]
   connect_bd_intf_net -intf_net in_system_ibert_0_GT0_DRP [get_bd_intf_pins gig_ethernet_pcs_pma_0/gt_drp] [get_bd_intf_pins in_system_ibert_0/GT0_DRP]
   connect_bd_intf_net -intf_net mollerTI_0_C2H [get_bd_intf_pins mollerTI_0/C2H] [get_bd_intf_pins ti_fifo/S_AXIS]
   connect_bd_intf_net -intf_net priority_switch_M00_AXIS [get_bd_intf_pins axi_dma_0/S_AXIS_S2MM] [get_bd_intf_pins packet_switch/M00_AXIS]

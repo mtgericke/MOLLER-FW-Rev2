@@ -1285,6 +1285,8 @@ architecture Behavioral of TInode is
   signal ClkFreq  : std_logic_vector(31 downto 0);
   signal BoardID  : std_logic_vector(7 downto 0);
   signal Clk625Mon : std_logic := '0';
+  signal VmeRst7ROCack : std_logic:='0';
+
 
 begin
 
@@ -1608,8 +1610,10 @@ begin
       ReadoutType => EvtType(7 downto 0),    -- in  std_logic_vector (7 downto 0);
       RegTrgTime  => RegTrgTime,           -- in    std_logic;
       Reset       => Reset,                -- in    std_logic;
-      ROCAckIn(1) => VmeReset(7),
-      ROCAckIn(8 downto 2) => "0000000",   -- in    std_logic_vector (8 downto 1);
+--      ROCAckIn(1) => VmeReset(7),
+      ROCAckIn(1) => VmeRst7ROCack,  -- clock resyned VmeReset(7)
+      ROCAckIn(2) => GENINP(10),
+      ROCAckIn(8 downto 3) => "000000",   -- in    std_logic_vector (8 downto 1);
       ROCEn       => ROCEn(7 downto 0),    -- in    std_logic_vector (8 downto 1);
       SyncEvt     => SyncEvt,    -- in    std_logic;
       TrgInhibit  => TrgInhibit, -- in    std_logic;
@@ -1628,10 +1632,11 @@ begin
       NEvt        => BlockAv(31 downto 24),  -- out std_logic_vector (7 downto 0);
       RegNum      => RegL1ANum(47 downto 0), -- out std_logic_vector (47 downto 0);
       ROCack      => Status(7),             -- out  std_logic;
-      ROCAckRd    => ROCAckRd(63 downto 0), -- out  std_logic_vector (63 downto 0);
+      ROCAckRd(55 downto 0)    => ROCAckRd(55 downto 0), -- out  std_logic_vector (63 downto 0);
+      ROCAckRd(63 downto 56)   => open, -- ROCAckRd(63 downto 0), -- out  std_logic_vector (63 downto 0);
       SyncEvtSet  => SyncEvtSet,            -- out  std_logic;
       TDCEvtReg   => TDCEvtReg(3 downto 0), -- out  std_logic_vector (3 downto 0);
-      TestPt      => TestDataG(8 downto 1), -- out  std_logic_vector (4 downto 1);
+      TestPt      => ROCAckRd(63 downto 56), -- TestDataG(8 downto 1), -- out  std_logic_vector (4 downto 1);
       TIfifoFull  => TIfifoFull, -- out   std_logic;
       TItimeMon   => TItimeMon(15 downto 0), -- out 15:0
       TrgLost     => TrgLost,    -- out   std_logic;
@@ -1837,6 +1842,12 @@ begin
               ClkIn  => ClkReg, -- in STD_LOGIC;
               ClkOut => Clk625, -- in STD_LOGIC;
               SigOut => SyncSRstReq ); -- out STD_LOGIC);
+-- Use SigClkA2B for ROCack
+  Resync_vmeRstROCack : SigClkA2B
+    port map (SigIn  => VmeReset(7), -- in STD_LOGIC;
+              ClkIn  => ClkReg, -- in STD_LOGIC;
+              ClkOut => Clk625, -- in STD_LOGIC;
+              SigOut => VmeRst7ROCack ); -- out STD_LOGIC);
 --  SRstReq <= VmeReset(23);
 --  SynSRstReq2Clk : Signal2Clk
 --    Port map(Clk => Clk625,         -- in STD_LOGIC;
@@ -2413,6 +2424,8 @@ begin
       Clk625Mon <= not Clk625Mon;
     end if;
   end process;
-  TCSOut(10 downto 1) <= SReset(11) & SReset(9) & SReset(7) & SReset(5) & SReset(3) & SReset(2) & Status(7) & Reset & Trig1 & IODlyRst;
-  TCSOut(16 downto 11) <= MasterMode(3 downto 1) & SReset(14 downto 12);
+--  TCSOut(10 downto 1) <= SReset(11) & SReset(9) & SReset(7) & SReset(5) & SReset(3) & SReset(2) & Status(7) & Reset & Trig1 & IODlyRst;
+  TCSOut(10 downto 1) <= SReset(11) & ClockSrc(7 downto 5) & SReset(3) & SReset(2) & Status(7) & Reset & Trig1 & VmeRst7RocAck; -- IODlyRst;
+--  TCSOut(16 downto 11) <= MasterMode(3 downto 1) & SReset(14 downto 12);
+  TCSOut(16 downto 11) <= MasterMode(3 downto 1) & VMEReset(7) & Status(10) & Status(8);
 end Behavioral;

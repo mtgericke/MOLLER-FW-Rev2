@@ -15,6 +15,7 @@ module subsystem_clock (
     output wire rst_out_250,
 
     output wire clk_625,
+    output wire clk_out_50,
 
     // LMK clock cleaner pins
     output wire LMK_UWIRE_CLK,
@@ -49,17 +50,18 @@ assign rst_out_125 = rst_125;
 assign rst_out_250 = rst_250;
 
 // LMK04816 Clock cleaner configuration
+// ADC_rev1 board
 assign uwire_cfg_data = {
-    32'h00160140, // CLK 0/1 (250MHz for TI)
-    32'h00140140, // CLK 0/1 (out of reset)
-    32'h80140281, // CLK 2/3 (Powered Down,  SOM IN (currently unused) set to 125MHz
-    32'h00140282, // CLK 4/5  (MGT B229/230 REFCLKs, 125 MHz)
+    32'h80160140, // CLK 0/1 (250MHz for TI)
+    32'h00140280, // CLK 0/1 ()
+    32'h00141901, // CLK 2/3 ()
+    32'h00140202, // CLK 4/5  (MGT B229/230 REFCLKs, 156.25)
     32'h00140283, // CLK 6/7  (MGT B228/ REP OUT, 125)
-    32'h00140284, // CLK 8/9  SMA_CLK_OUT1 (125 MHz)
-    32'h00140145, // CLK 10/11 SMA_CLK_OUT0, 250 MHz
-    32'h11110006, // Clock Types (LVDS) and Delay
-    32'h01110007, // Disabling Clock 7
-    32'h01010008, // Disabling Clock 11 and 9
+    32'h00140284, // CLK 8/9  (CLKB / CLKA 125
+    32'h00140145, // CLK 10/11 (250 MHz for TI)
+    32'h00000006, // Disabling CLK 3/2/1/0. Originally: 32'h11110006
+    32'h11110007,
+    32'h11000008, // Disabling CLK 9/8. Orignally 32'h11110008
     32'h55555549,
     32'h914249AA,
     32'h1403000B,
@@ -77,6 +79,35 @@ assign uwire_cfg_data = {
     32'h0500015E,
     32'h001F001F
 };
+// ADC_rev2 board
+//assign uwire_cfg_data = {
+//    32'h00160140, // CLK 0/1 (250MHz for TI)
+//    32'h00140140, // CLK 0/1 (out of reset)
+//    32'h80140281, // CLK 2/3 (Powered Down,  SOM IN (currently unused) set to 125MHz
+//    32'h00140282, // CLK 4/5  (MGT B229/230 REFCLKs, 125 MHz)
+//    32'h00140283, // CLK 6/7  (MGT B228/ REP OUT, 125)
+//    32'h00140284, // CLK 8/9  SMA_CLK_OUT1 (125 MHz)
+//    32'h00140145, // CLK 10/11 SMA_CLK_OUT0, 250 MHz
+//    32'h11110006, // Clock Types (LVDS) and Delay
+//    32'h01110007, // Disabling Clock 7
+//    32'h01010008, // Disabling Clock 11 and 9
+//    32'h55555549,
+//    32'h914249AA,
+//    32'h1403000B,
+//    32'h0B8C01AC,
+//    32'h130086ED,
+//    32'h1000000E,
+//    32'h8000800F,
+//    32'hC1550410,
+//    32'h000000D8,
+//    32'h02C9C419,
+//    32'hAFA8001A,
+//    8'h1D, 2'b10, clkin0_prediv, 20'h0065B, // 32'h1E90065B,
+//    32'h0040191C,
+//    32'h0180015D,
+//    32'h0500015E,
+//    32'h001F001F
+//};
 
 reg [2:0] r_soc_ready_sync;
 reg r_soc_ready;
@@ -150,6 +181,7 @@ mmcm_adc adc_mmcm (
     // Clock out ports
     .clk_adc_cnv( clk_out_250 ),
     .clk_adc ( clk_out_125 ),
+    .clk_50  ( clk_out_50 ),
     .clk_625 ( clk_625 )
 );
 

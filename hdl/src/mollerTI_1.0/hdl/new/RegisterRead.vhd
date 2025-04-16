@@ -298,7 +298,7 @@ begin
                              O(15 downto 8) <= TIinfo(143 downto 136);
                              O(23 downto 16) <= TIinfo(215 downto 208);
                              O(31 downto 24) <= TIinfo(287 downto 280);
-          when others =>     O <= x"bad" & x"add" & x"32"; -- BadAddVR (4-bit Version, 4-bit revision) V1.5 on Dec. 7, 2021
+          when others =>     O <= x"bad" & x"add" & x"33"; -- BadAddVR (4-bit Version, 4-bit revision) V1.5 on Dec. 7, 2021
 --        when others =>     O <= "0111000111100010" & "1001000000011101"; -- 0x71E2_901d (gold) on Jan. 10, 2022
         end case;
       else

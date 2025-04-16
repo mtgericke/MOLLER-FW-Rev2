@@ -18,8 +18,8 @@ module system_top
 
     output wire [3:0] LED_DSP,  // 4 Red LEDs, vertically stacked
 
-    input wire EXT_LVDS_IN_P, // 2.5V LVDS, may need to be used as 4 separate 2.5V inputs
-    input wire EXT_LVDS_IN_N, // 2.5V LVDS, may need to be used as 4 separate 2.5V inputs
+    output wire EXT_LVDS_IN_P, // 2.5V LVDS, may need to be used as 4 separate 2.5V inputs
+    output wire EXT_LVDS_IN_N, // 2.5V LVDS, may need to be used as 4 separate 2.5V inputs
 
     output wire EXT_LVDS_OUT_P, // 2.5V LVDS, may need to be used as 4 separate 2.5V inputs
     output wire EXT_LVDS_OUT_N, // 2.5V LVDS, may need to be used as 4 separate 2.5V inputs
@@ -39,6 +39,7 @@ module system_top
     output wire ADC_CNVT_SEL,
     output wire ADC_TESTPAT,
     output wire SEL_TI_MGTn,
+    output wire SEL_TI_MGTe,  // does not exist on ADC_V2 boards
     output wire ADC_PDn,
 
     input wire [NUM_ADC_CH:1] ADC_DCO_P,
@@ -198,6 +199,7 @@ wire udp_tx_clk;
 
 wire clk;
 wire clk_625;
+wire clk_50;
 wire rst;
 wire clk_convert;
 wire rst_convert;
@@ -236,6 +238,7 @@ wire [NUM_ADC_CH-1:0] db;
 
 wire [16:1] tcsout;
 wire [16:1] genoutp;
+wire [16:1] geninp;
 
 wire [NUM_ADC_CH-1:0][15:0] bad_dco_counter;
 wire [NUM_ADC_CH-1:0][15:0] bad_data_counter;
@@ -247,16 +250,26 @@ wire [3:0] led_output;
 
 wire clock_sync;
 wire block_trigger;
+wire clock_reset;
 
 assign I2C_SCL_PL = 1'bZ;
 assign I2C_SDA_PL = 1'bZ;
 assign LED2_N_PWR_SYNC = 1'bZ;
-assign LMK_STAT_CLKin2_SYNC = 1'b1; // SYNC for clock cleaner
+
+// set to clock_sync
+//assign LMK_STAT_CLKin2_SYNC = 1'b1; // SYNC for clock cleaner
+assign LMK_STAT_CLKin2_SYNC = {~clock_sync}; // SYNC for clock cleaner
+
 assign ADC_PDn = ~ctrl_adc_pwr_down;
 assign ADC_TESTPAT = ctrl_adc_testpat;
-assign LMK_STAT_CLKin0 = SW1[6];
-assign LMK_STAT_CLKin1 = SW1[5];
+//assign LMK_STAT_CLKin0 = SW1[6];
+//assign LMK_STAT_CLKin1 = SW1[5];
+assign LMK_STAT_CLKin0 = (tcsout[15] == tcsout[14]) ? 1'b0 : 1'b1; // 00=>10, 01=>11, 10=>01, 11=>00
+assign LMK_STAT_CLKin1 = (tcsout[15] == 1'b0)? 1'b1 : 1'b0; 
+
 assign SEL_TI_MGTn = (SW1[1] == 1'b1) ? 1'bZ : 1'b0; // 3V3 pullup on pin exceeds pins 2V5 IO voltage, infer open-drain buffer
+// SEL_TI_MGTe does not exist on ADC_V2 board, 
+assign SEL_TI_MGTe = (SW1[1] == 1'b1) ? 1'bZ : 1'b0; // 3V3 pullup on pin exceeds pins 2V5 IO voltage, infer open-drain buffer
 
 // These are pulled up, so use output buffer to make open drain
 assign TI_RESETn = 1'bZ; // let it get pulled high
@@ -265,10 +278,16 @@ assign DATA_RESETn = 1'bZ; // let it get pulled high
 assign DATA_ModSELn = 1'bZ; // determines which QSFP slots i2c is used
 
 assign ADC_CNVT_SEL = 1'b1;
-assign clock_sync = tcsout[6];
-assign block_trigger = genoutp[2];
-
-assign LED_DSP = (SW1[2]) ? led_output : { TTL_INPUT, nim_input };
+assign clock_sync = { tcsout[9] & tcsout[6]};  // TCSOUT(9:7) = ClkSrc(7:5), to enable the commands to the ADC, Feb. 25, 2025
+assign block_trigger = {tcsout[8] & genoutp[2]}; 
+// rst is the OR of clock_reset and TI_reset (tcsout(3))
+assign rst = (clock_reset | {tcsout[7] & tcsout[3]} );
+// Connect the TTL_INPUT to TI_FP_trigger_In
+assign geninp[2]  = {|TTL_INPUT};
+assign geninp[10] = adc_fifo_tlast; // readout Acknowledge
+assign geninp[1]  = {~adc_fifo_tready}; // assign fifo_not_ready as busy
+//assign LED_DSP = (SW1[2]) ? led_output : { TTL_INPUT, nim_input };
+assign LED_DSP = (SW1[2]) ? led_output : genoutp[12:9]; //{ TTL_INPUT, nim_input };
 
 // Conversion Enable signal to ADCs
 OBUFDS diff_som_out_cnv_a	(	.I(adc_convert),	    .O(SOM_OUT_CNVA_P),	.OB(SOM_OUT_CNVA_N)	);
@@ -292,10 +311,15 @@ IBUFDS diff_lvds_nim1       (	.O(nim_input[1]),	    .I(LVDS_NIM_P[1]),      .IB(
 IBUFDS diff_clnr_osc        (	.O(clnr_osc),	        .I(CLNR_OSC_P),         .IB(CLNR_OSC_N) );        // 100 MHz VCXO
 IBUFDS diff_fpga_250_td     (	.O(fpga_clk250_td),	    .I(FPGA_CLK250_TD_P),   .IB(FPGA_CLK250_TD_N) );  // Cleaner CLK_OUT10
 
-IBUFDS diff_ext_lvds_in     (	.O(ext_lvds_in),	    .I(EXT_LVDS_IN_P),      .IB(EXT_LVDS_IN_N) );
-OBUFDS diff_ext_lvds_out    (	.I(ext_lvds_out),	    .O(EXT_LVDS_OUT_P),     .OB(EXT_LVDS_OUT_N) );
-
-assignb ext_lvds_out = ext_lvds_in;
+//IBUFDS diff_ext_lvds_in     (	.O(ext_lvds_in),	    .I(EXT_LVDS_IN_P),      .IB(EXT_LVDS_IN_N) );
+//OBUFDS diff_ext_lvds_out    (	.I(ext_lvds_out),	    .O(EXT_LVDS_OUT_P),     .OB(EXT_LVDS_OUT_N) );
+//assignb ext_lvds_out = ext_lvds_in;
+assign EXT_LVDS_OUT_P = genoutp[2]; // ReadoutTrigger EXT_LVDS_IN_P;
+assign EXT_LVDS_OUT_N = {tcsout[3] | tcsout[12] | tcsout[11] };   // reset  EXT_LVDS_IN_N;
+assign EXT_LVDS_IN_P = { tcsout[4] | tcsout[1] }; // ReadOut Acknowledge;
+assign EXT_LVDS_IN_N = tcsout[13]; // genoutp[13]; // pulsed-trigger
+// tcsout[13]=VmeReset[7]; tcsout[12]=Status[10] or Trigger1Ack; 
+// tcsout[11]= status[8] or BlockReceived; tcsout[4]=status[7] or TI_Readout Acknoledgement
 
 subsystem_clock clock_subsystem (
     .clk_osc_125( clnr_osc ), // oscillator 100MHz
@@ -307,7 +331,11 @@ subsystem_clock clock_subsystem (
     .clkin0_prediv( SW1[4:3] ),
 
     .clk_out_125( clk ),
-    .rst_out_125( rst ),
+
+    .clk_out_50( clk_50 ),
+// output clock_reset
+//    .rst_out_125( rst ),
+    .rst_out_125( clock_reset ),
 
     .clk_out_250( clk_convert ),
     .rst_out_250( rst_convert ),
@@ -411,7 +439,9 @@ subsystem_capture #(
     .rst( rst ),
 
     .ena( 1'b1 ),
-    .start( {|TTL_INPUT} ),
+// Change the start from TTL_INPUT to TI_trigger
+//    .start( {|TTL_INPUT} ),
+    .start( block_trigger ),
 
     .in_timestamp( ts_data ),
     .sample_valid( adc_data_valid ),
@@ -456,6 +486,7 @@ axi_stream_len_prepender #(
 	.out_tvalid( ti_fifo_tvalid ),
 	.out_tready( ti_fifo_tready )
 );
+
 
 Mercury_XU1 bd (
     .clk_125(clk),
@@ -544,11 +575,11 @@ Mercury_XU1 bd (
     // JLab TI
     .CLK250( clk_convert ),
     .CLK625( clk_625 ),
-    .CLKPrg( clk ),
+    .CLKPrg( clk_50 ),
 
     .CLKREFO_N(),
     .CLKREFO_P(),
-    .GENINP(),
+    .GENINP(geninp),
     .GENOUTP(genoutp),
     .SWM(),
     .TCSOUT(tcsout),
