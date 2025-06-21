@@ -1,8 +1,8 @@
 //Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2020.2 (lin64) Build 3064766 Wed Nov 18 09:12:47 MST 2020
-//Date        : Mon Jun  9 23:48:25 2025
-//Host        : davmtest0 running 64-bit Ubuntu 18.04.6 LTS
+//Date        : Tue Jun 17 13:48:09 2025
+//Host        : gu-pc2.jlab.org running 64-bit Red Hat Enterprise Linux release 8.10 (Ootpa)
 //Command     : generate_target Mercury_XU1_wrapper.bd
 //Design      : Mercury_XU1_wrapper
 //Purpose     : IP block netlist
@@ -31,11 +31,6 @@ module Mercury_XU1_wrapper
     TI1TX_P,
     TICLK_N,
     TICLK_P,
-    TI_C2H_tdata,
-    TI_C2H_tkeep,
-    TI_C2H_tlast,
-    TI_C2H_tready,
-    TI_C2H_tvalid,
     adc_ctrl_ch_disable,
     adc_ctrl_clear_counters,
     adc_ctrl_ena,
@@ -98,11 +93,6 @@ module Mercury_XU1_wrapper
   output TI1TX_P;
   input TICLK_N;
   input TICLK_P;
-  output [63:0]TI_C2H_tdata;
-  output [7:0]TI_C2H_tkeep;
-  output TI_C2H_tlast;
-  input TI_C2H_tready;
-  output TI_C2H_tvalid;
   output [15:0]adc_ctrl_ch_disable;
   output [0:0]adc_ctrl_clear_counters;
   output [0:0]adc_ctrl_ena;
@@ -166,11 +156,6 @@ module Mercury_XU1_wrapper
   wire TI1TX_P;
   wire TICLK_N;
   wire TICLK_P;
-  wire [63:0]TI_C2H_tdata;
-  wire [7:0]TI_C2H_tkeep;
-  wire TI_C2H_tlast;
-  wire TI_C2H_tready;
-  wire TI_C2H_tvalid;
   wire [15:0]adc_ctrl_ch_disable;
   wire [0:0]adc_ctrl_clear_counters;
   wire [0:0]adc_ctrl_ena;
@@ -235,11 +220,6 @@ module Mercury_XU1_wrapper
         .TI1TX_P(TI1TX_P),
         .TICLK_N(TICLK_N),
         .TICLK_P(TICLK_P),
-        .TI_C2H_tdata(TI_C2H_tdata),
-        .TI_C2H_tkeep(TI_C2H_tkeep),
-        .TI_C2H_tlast(TI_C2H_tlast),
-        .TI_C2H_tready(TI_C2H_tready),
-        .TI_C2H_tvalid(TI_C2H_tvalid),
         .adc_ctrl_ch_disable(adc_ctrl_ch_disable),
         .adc_ctrl_clear_counters(adc_ctrl_clear_counters),
         .adc_ctrl_ena(adc_ctrl_ena),

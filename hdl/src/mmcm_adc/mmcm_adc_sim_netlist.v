@@ -1,9 +1,9 @@
 // Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2020.2 (lin64) Build 3064766 Wed Nov 18 09:12:47 MST 2020
-// Date        : Thu Sep  7 03:08:23 2023
-// Host        : home running 64-bit unknown
-// Command     : write_verilog -force -mode funcsim /home/xil/hdl/src/mmcm_adc/mmcm_adc_sim_netlist.v
+// Date        : Tue Jun 17 13:40:09 2025
+// Host        : gu-pc2.jlab.org running 64-bit Red Hat Enterprise Linux release 8.10 (Ootpa)
+// Command     : write_verilog -force -mode funcsim /home/jgu/fpga_vivado/molleradc/hdl/src/mmcm_adc/mmcm_adc_sim_netlist.v
 // Design      : mmcm_adc
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -16,16 +16,19 @@ module mmcm_adc
    (clk_adc_cnv,
     clk_adc,
     clk_625,
+    clk_50,
     reset,
     locked,
     clk_in1);
   output clk_adc_cnv;
   output clk_adc;
   output clk_625;
+  output clk_50;
   input reset;
   output locked;
   input clk_in1;
 
+  wire clk_50;
   wire clk_625;
   wire clk_adc;
   wire clk_adc_cnv;
@@ -34,7 +37,8 @@ module mmcm_adc
   wire reset;
 
   mmcm_adc_mmcm_adc_clk_wiz inst
-       (.clk_625(clk_625),
+       (.clk_50(clk_50),
+        .clk_625(clk_625),
         .clk_adc(clk_adc),
         .clk_adc_cnv(clk_adc_cnv),
         .clk_in1(clk_in1),
@@ -47,16 +51,21 @@ module mmcm_adc_mmcm_adc_clk_wiz
    (clk_adc_cnv,
     clk_adc,
     clk_625,
+    clk_50,
     reset,
     locked,
     clk_in1);
   output clk_adc_cnv;
   output clk_adc;
   output clk_625;
+  output clk_50;
   input reset;
   output locked;
   input clk_in1;
 
+  wire clk_50;
+  wire clk_50_mmcm_adc;
+  wire clk_50_mmcm_adc_en_clk;
   wire clk_625;
   wire clk_625_mmcm_adc;
   wire clk_625_mmcm_adc_en_clk;
@@ -75,6 +84,7 @@ module mmcm_adc_mmcm_adc_clk_wiz
   (* RTL_KEEP = "true" *) (* async_reg = "true" *) wire [7:0]seq_reg1;
   (* RTL_KEEP = "true" *) (* async_reg = "true" *) wire [7:0]seq_reg2;
   (* RTL_KEEP = "true" *) (* async_reg = "true" *) wire [7:0]seq_reg3;
+  (* RTL_KEEP = "true" *) (* async_reg = "true" *) wire [7:0]seq_reg4;
   wire NLW_mmcme4_adv_inst_CDDCDONE_UNCONNECTED;
   wire NLW_mmcme4_adv_inst_CLKFBOUTB_UNCONNECTED;
   wire NLW_mmcme4_adv_inst_CLKFBSTOPPED_UNCONNECTED;
@@ -82,7 +92,6 @@ module mmcm_adc_mmcm_adc_clk_wiz
   wire NLW_mmcme4_adv_inst_CLKOUT0B_UNCONNECTED;
   wire NLW_mmcme4_adv_inst_CLKOUT1B_UNCONNECTED;
   wire NLW_mmcme4_adv_inst_CLKOUT2B_UNCONNECTED;
-  wire NLW_mmcme4_adv_inst_CLKOUT3_UNCONNECTED;
   wire NLW_mmcme4_adv_inst_CLKOUT3B_UNCONNECTED;
   wire NLW_mmcme4_adv_inst_CLKOUT4_UNCONNECTED;
   wire NLW_mmcme4_adv_inst_CLKOUT5_UNCONNECTED;
@@ -176,6 +185,28 @@ module mmcm_adc_mmcm_adc_clk_wiz
         .I(clk_625_mmcm_adc),
         .O(clk_625_mmcm_adc_en_clk));
   (* BOX_TYPE = "PRIMITIVE" *) 
+  BUFGCE #(
+    .CE_TYPE("SYNC"),
+    .IS_CE_INVERTED(1'b0),
+    .IS_I_INVERTED(1'b0),
+    .SIM_DEVICE("ULTRASCALE"),
+    .STARTUP_SYNC("FALSE")) 
+    clkout4_buf
+       (.CE(seq_reg4[7]),
+        .I(clk_50_mmcm_adc),
+        .O(clk_50));
+  (* BOX_TYPE = "PRIMITIVE" *) 
+  BUFGCE #(
+    .CE_TYPE("SYNC"),
+    .IS_CE_INVERTED(1'b0),
+    .IS_I_INVERTED(1'b0),
+    .SIM_DEVICE("ULTRASCALE"),
+    .STARTUP_SYNC("FALSE")) 
+    clkout4_buf_en
+       (.CE(1'b1),
+        .I(clk_50_mmcm_adc),
+        .O(clk_50_mmcm_adc_en_clk));
+  (* BOX_TYPE = "PRIMITIVE" *) 
   MMCME4_ADV #(
     .BANDWIDTH("HIGH"),
     .CLKFBOUT_MULT_F(6.000000),
@@ -195,7 +226,7 @@ module mmcm_adc_mmcm_adc_clk_wiz
     .CLKOUT2_DUTY_CYCLE(0.500000),
     .CLKOUT2_PHASE(0.000000),
     .CLKOUT2_USE_FINE_PS("FALSE"),
-    .CLKOUT3_DIVIDE(1),
+    .CLKOUT3_DIVIDE(30),
     .CLKOUT3_DUTY_CYCLE(0.500000),
     .CLKOUT3_PHASE(0.000000),
     .CLKOUT3_USE_FINE_PS("FALSE"),
@@ -245,7 +276,7 @@ module mmcm_adc_mmcm_adc_clk_wiz
         .CLKOUT1B(NLW_mmcme4_adv_inst_CLKOUT1B_UNCONNECTED),
         .CLKOUT2(clk_625_mmcm_adc),
         .CLKOUT2B(NLW_mmcme4_adv_inst_CLKOUT2B_UNCONNECTED),
-        .CLKOUT3(NLW_mmcme4_adv_inst_CLKOUT3_UNCONNECTED),
+        .CLKOUT3(clk_50_mmcm_adc),
         .CLKOUT3B(NLW_mmcme4_adv_inst_CLKOUT3B_UNCONNECTED),
         .CLKOUT4(NLW_mmcme4_adv_inst_CLKOUT4_UNCONNECTED),
         .CLKOUT5(NLW_mmcme4_adv_inst_CLKOUT5_UNCONNECTED),
@@ -504,6 +535,86 @@ module mmcm_adc_mmcm_adc_clk_wiz
         .CLR(reset),
         .D(seq_reg3[6]),
         .Q(seq_reg3[7]));
+  (* ASYNC_REG *) 
+  (* KEEP = "yes" *) 
+  FDCE #(
+    .INIT(1'b0)) 
+    \seq_reg4_reg[0] 
+       (.C(clk_50_mmcm_adc_en_clk),
+        .CE(1'b1),
+        .CLR(reset),
+        .D(locked),
+        .Q(seq_reg4[0]));
+  (* ASYNC_REG *) 
+  (* KEEP = "yes" *) 
+  FDCE #(
+    .INIT(1'b0)) 
+    \seq_reg4_reg[1] 
+       (.C(clk_50_mmcm_adc_en_clk),
+        .CE(1'b1),
+        .CLR(reset),
+        .D(seq_reg4[0]),
+        .Q(seq_reg4[1]));
+  (* ASYNC_REG *) 
+  (* KEEP = "yes" *) 
+  FDCE #(
+    .INIT(1'b0)) 
+    \seq_reg4_reg[2] 
+       (.C(clk_50_mmcm_adc_en_clk),
+        .CE(1'b1),
+        .CLR(reset),
+        .D(seq_reg4[1]),
+        .Q(seq_reg4[2]));
+  (* ASYNC_REG *) 
+  (* KEEP = "yes" *) 
+  FDCE #(
+    .INIT(1'b0)) 
+    \seq_reg4_reg[3] 
+       (.C(clk_50_mmcm_adc_en_clk),
+        .CE(1'b1),
+        .CLR(reset),
+        .D(seq_reg4[2]),
+        .Q(seq_reg4[3]));
+  (* ASYNC_REG *) 
+  (* KEEP = "yes" *) 
+  FDCE #(
+    .INIT(1'b0)) 
+    \seq_reg4_reg[4] 
+       (.C(clk_50_mmcm_adc_en_clk),
+        .CE(1'b1),
+        .CLR(reset),
+        .D(seq_reg4[3]),
+        .Q(seq_reg4[4]));
+  (* ASYNC_REG *) 
+  (* KEEP = "yes" *) 
+  FDCE #(
+    .INIT(1'b0)) 
+    \seq_reg4_reg[5] 
+       (.C(clk_50_mmcm_adc_en_clk),
+        .CE(1'b1),
+        .CLR(reset),
+        .D(seq_reg4[4]),
+        .Q(seq_reg4[5]));
+  (* ASYNC_REG *) 
+  (* KEEP = "yes" *) 
+  FDCE #(
+    .INIT(1'b0)) 
+    \seq_reg4_reg[6] 
+       (.C(clk_50_mmcm_adc_en_clk),
+        .CE(1'b1),
+        .CLR(reset),
+        .D(seq_reg4[5]),
+        .Q(seq_reg4[6]));
+  (* ASYNC_REG *) 
+  (* KEEP = "yes" *) 
+  FDCE #(
+    .INIT(1'b0)) 
+    \seq_reg4_reg[7] 
+       (.C(clk_50_mmcm_adc_en_clk),
+        .CE(1'b1),
+        .CLR(reset),
+        .D(seq_reg4[6]),
+        .Q(seq_reg4[7]));
 endmodule
 `ifndef GLBL
 `define GLBL

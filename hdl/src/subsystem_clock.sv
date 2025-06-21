@@ -16,6 +16,7 @@ module subsystem_clock (
     output wire rst_out_250,
 
     output wire clk_625,
+    output wire clk_50,
 
     // LMK clock cleaner pins
     output wire LMK_UWIRE_CLK,
@@ -151,6 +152,7 @@ mmcm_adc adc_mmcm (
     // Clock out ports
     .clk_adc_cnv( clk_out_250 ),
     .clk_adc ( clk_out_125 ),
+    .clk_50 (clk_50),
     .clk_625 ( clk_625 )
 );
 
