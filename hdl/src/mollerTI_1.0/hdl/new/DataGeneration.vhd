@@ -252,8 +252,10 @@ architecture Behavioral of DataGeneration is
   signal PreTrgEnable   : std_logic := '0';
   signal D1PreTrgEnable : std_logic := '0';  -- ClkUsr delayed PreTrgEnable
   signal D2PreTrgEnable : std_logic := '0';
-  signal working  : std_logic := '0';
-  
+  signal working    : std_logic := '0';
+  signal ClkUsrMon  : std_logic := '0';
+  signal ROCAckRdInt    : std_logic_vector (63 downto 0); 
+
 begin
 
   working <= not reset;
@@ -687,12 +689,14 @@ begin
       BlkRcvdInt <= BlkEndReg;
       ClkVmeD1 <= ClkVmeHalf(3);
       ClkVmeD2 <= ClkVmeD1;
+      ClkUsrMon <= (not ClkUsrMon);
     end if;
   end process;
   VmeReg <= CLkVmeD1 and (not ClkVmeD2);
   BlkRcvd <= BlkRcvdInt;
 
-  
+  TestPt(8 downto 1) <= ROCackIn(1) & Reset & ROCackInt & ROCReady(1) & ROCAckRdInt(0) & ROCEn(1) & ClkUsrMon & BlkRcvdInt;
+                
 -- ROC Ack logic: There could be upto 8 ROC, and some ROC may get ackniledgement ahead of others
   ROCAcknoledgements :
   for iROC in 1 to 8 generate
@@ -703,8 +707,9 @@ begin
         Reset     => Reset,          -- in STD_LOGIC;
         ROCAckd   => ROCackInt,         -- in STD_LOGIC;
         ROCiReady => ROCReady(iROC), -- out std_logic;
-        ROCAckBuf => ROCAckRd((8*iROC -1) downto ((iROC-1)*8)) ); --out STD_LOGIC_VECTOR (7 downto 0));
+        ROCAckBuf => ROCAckRdInt((8*iROC -1) downto ((iROC-1)*8)) ); --out STD_LOGIC_VECTOR (7 downto 0));
   end generate;
+  ROCAckRd <= ROCAckRdInt;
   process (ClkUsr)
   begin
     if (ClkUsr'event and ClkUsr = '1') then
@@ -803,7 +808,7 @@ Q => DDSyncEvt,         -- 1-bit output: SRL Data
             or (FnFull(3) and ROCEn(3)) or (FnFull(4) and ROCEn(4))
             or (FnFull(5) and ROCEn(5)) or (FnFull(6) and ROCEn(6))
             or (FnFull(7) and ROCEn(7)) or (FnFull(8) and ROCEn(8));
-  TestPt(8 downto 5) <= ReadOutTrg & TrgInhibit & FnFull(1) &  TIFFFullInt;
-  TestPt(4 downto 1) <= PreTrg & ExtraWord & BlkEndInt & SyncEvtSetInt;
+--  TestPt(8 downto 5) <= ReadOutTrg & TrgInhibit & FnFull(1) &  TIFFFullInt;
+--  TestPt(4 downto 1) <= PreTrg & ExtraWord & BlkEndInt & SyncEvtSetInt;
 
 end Behavioral;

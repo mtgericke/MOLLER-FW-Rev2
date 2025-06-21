@@ -59,6 +59,7 @@
 // clk_adc_cnv__250.00000______0.000______50.0_______79.446_____72.667
 // _clk_adc__125.00000______0.000______50.0_______90.793_____72.667
 // _clk_625__62.50000______0.000______50.0______103.785_____72.667
+// __clk_50__50.00000______0.000______50.0______108.355_____72.667
 //
 //----------------------------------------------------------------------------
 // Input Clock   Freq (MHz)    Input Jitter (UI)
@@ -74,6 +75,7 @@ module mmcm_adc_clk_wiz
   output        clk_adc_cnv,
   output        clk_adc,
   output        clk_625,
+  output        clk_50,
   // Status and control signals
   input         reset,
   output        locked,
@@ -115,7 +117,6 @@ wire clk_in2_mmcm_adc;
     wire clkout0b_unused;
    wire clkout1b_unused;
    wire clkout2b_unused;
-   wire clkout3_unused;
    wire clkout3b_unused;
    wire clkout4_unused;
   wire        clkout5_unused;
@@ -132,6 +133,9 @@ wire clk_in2_mmcm_adc;
   (* KEEP = "TRUE" *) 
   (* ASYNC_REG = "TRUE" *)
   reg  [7 :0] seq_reg3 = 0;
+  (* KEEP = "TRUE" *) 
+  (* ASYNC_REG = "TRUE" *)
+  reg  [7 :0] seq_reg4 = 0;
 
 
   
@@ -157,6 +161,10 @@ wire clk_in2_mmcm_adc;
     .CLKOUT2_PHASE        (0.000),
     .CLKOUT2_DUTY_CYCLE   (0.500),
     .CLKOUT2_USE_FINE_PS  ("FALSE"),
+    .CLKOUT3_DIVIDE       (30),
+    .CLKOUT3_PHASE        (0.000),
+    .CLKOUT3_DUTY_CYCLE   (0.500),
+    .CLKOUT3_USE_FINE_PS  ("FALSE"),
     .CLKIN1_PERIOD        (4.000))
   
   mmcme4_adv_inst
@@ -170,7 +178,7 @@ wire clk_in2_mmcm_adc;
     .CLKOUT1B            (clkout1b_unused),
     .CLKOUT2             (clk_625_mmcm_adc),
     .CLKOUT2B            (clkout2b_unused),
-    .CLKOUT3             (clkout3_unused),
+    .CLKOUT3             (clk_50_mmcm_adc),
     .CLKOUT3B            (clkout3b_unused),
     .CLKOUT4             (clkout4_unused),
     .CLKOUT5             (clkout5_unused),
@@ -277,6 +285,27 @@ wire clk_in2_mmcm_adc;
     end
     else begin
         seq_reg3 <= {seq_reg3[6:0],locked_int};
+  
+    end
+  end
+
+
+  BUFGCE clkout4_buf
+   (.O   (clk_50),
+    .CE  (seq_reg4[7]),
+    .I   (clk_50_mmcm_adc));
+
+  BUFGCE clkout4_buf_en
+   (.O   (clk_50_mmcm_adc_en_clk),
+    .CE  (1'b1),
+    .I   (clk_50_mmcm_adc));
+	
+  always @(posedge clk_50_mmcm_adc_en_clk or posedge reset_high) begin
+    if(reset_high == 1'b1) begin
+	  seq_reg4 <= 8'h00;
+    end
+    else begin
+        seq_reg4 <= {seq_reg4[6:0],locked_int};
   
     end
   end

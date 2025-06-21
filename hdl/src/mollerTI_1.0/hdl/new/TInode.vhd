@@ -146,6 +146,14 @@ architecture Behavioral of TInode is
            SigOut : out STD_LOGIC);
   end component SigClkA2B;
 
+  component ClockFreqMeas is
+    Port ( Clock : in STD_LOGIC;
+           ClkA : in STD_LOGIC;
+           ClkB : in STD_LOGIC;
+           ClkR : in STD_LOGIC;
+           ClkFreq : out STD_LOGIC_VECTOR (31 downto 0));
+  end component ClockFreqMeas;
+
   component RegisterSet is
     Port (Address : in  STD_LOGIC_VECTOR (8 downto 0);
       DataIn  : in std_logic_vector (31 downto 0);
@@ -315,8 +323,10 @@ architecture Behavioral of TInode is
       I2CRData : in std_logic_vector(31 downto 0);
       ReadAOut : in std_logic_vector(35 downto 0);
       ReadBOut : in std_logic_vector(35 downto 0);
+      ClkFreq  : in std_logic_vector(31 downto 0);
       Clock    : in std_logic;
       Enable   : in std_logic;
+      DlyRValid : in std_logic;
       Address  : in std_logic_vector(8 downto 0) );
   end component; -- RegisterRead;
 
@@ -1272,6 +1282,11 @@ architecture Behavioral of TInode is
   signal SWFifoFull : std_logic;
   signal Dly1RValid : std_logic;
   signal Dly2RValid : std_logic;
+  signal ClkFreq  : std_logic_vector(31 downto 0);
+  signal BoardID  : std_logic_vector(7 downto 0);
+  signal Clk625Mon : std_logic := '0';
+  signal VmeRst7ROCack : std_logic:='0';
+
 
 begin
 
@@ -1311,6 +1326,13 @@ begin
         ResetAdd2 <= SyncReset;
   user_reset <= not user_resetn;
   working <= not SyncReset;
+
+  CLkFreqMeas : ClockFreqMeas
+    Port map( Clock => ClkReg, -- in STD_LOGIC;
+           ClkA => Clk250,      -- in STD_LOGIC;
+           ClkB => Clk625,      -- in STD_LOGIC;
+           ClkR => ClkReg,        --  in STD_LOGIC;
+           ClkFreq => ClkFreq );  -- out STD_LOGIC_VECTOR (31 downto 0));
 
 -- ClkRef differential receiver
   RefClkReceiver : IBUFDS_GTE4
@@ -1588,8 +1610,10 @@ begin
       ReadoutType => EvtType(7 downto 0),    -- in  std_logic_vector (7 downto 0);
       RegTrgTime  => RegTrgTime,           -- in    std_logic;
       Reset       => Reset,                -- in    std_logic;
-      ROCAckIn(1) => VmeReset(7),
-      ROCAckIn(8 downto 2) => "0000000",   -- in    std_logic_vector (8 downto 1);
+--      ROCAckIn(1) => VmeReset(7),
+      ROCAckIn(1) => VmeRst7ROCack,  -- clock resyned VmeReset(7)
+      ROCAckIn(2) => GENINP(10),
+      ROCAckIn(8 downto 3) => "000000",   -- in    std_logic_vector (8 downto 1);
       ROCEn       => ROCEn(7 downto 0),    -- in    std_logic_vector (8 downto 1);
       SyncEvt     => SyncEvt,    -- in    std_logic;
       TrgInhibit  => TrgInhibit, -- in    std_logic;
@@ -1608,10 +1632,11 @@ begin
       NEvt        => BlockAv(31 downto 24),  -- out std_logic_vector (7 downto 0);
       RegNum      => RegL1ANum(47 downto 0), -- out std_logic_vector (47 downto 0);
       ROCack      => Status(7),             -- out  std_logic;
-      ROCAckRd    => ROCAckRd(63 downto 0), -- out  std_logic_vector (63 downto 0);
+      ROCAckRd(55 downto 0)    => ROCAckRd(55 downto 0), -- out  std_logic_vector (63 downto 0);
+      ROCAckRd(63 downto 56)   => open, -- ROCAckRd(63 downto 0), -- out  std_logic_vector (63 downto 0);
       SyncEvtSet  => SyncEvtSet,            -- out  std_logic;
       TDCEvtReg   => TDCEvtReg(3 downto 0), -- out  std_logic_vector (3 downto 0);
-      TestPt      => TestDataG(8 downto 1), -- out  std_logic_vector (4 downto 1);
+      TestPt      => ROCAckRd(63 downto 56), -- TestDataG(8 downto 1), -- out  std_logic_vector (4 downto 1);
       TIfifoFull  => TIfifoFull, -- out   std_logic;
       TItimeMon   => TItimeMon(15 downto 0), -- out 15:0
       TrgLost     => TrgLost,    -- out   std_logic;
@@ -1817,6 +1842,12 @@ begin
               ClkIn  => ClkReg, -- in STD_LOGIC;
               ClkOut => Clk625, -- in STD_LOGIC;
               SigOut => SyncSRstReq ); -- out STD_LOGIC);
+-- Use SigClkA2B for ROCack
+  Resync_vmeRstROCack : SigClkA2B
+    port map (SigIn  => VmeReset(7), -- in STD_LOGIC;
+              ClkIn  => ClkReg, -- in STD_LOGIC;
+              ClkOut => Clk625, -- in STD_LOGIC;
+              SigOut => VmeRst7ROCack ); -- out STD_LOGIC);
 --  SRstReq <= VmeReset(23);
 --  SynSRstReq2Clk : Signal2Clk
 --    Port map(Clk => Clk625,         -- in STD_LOGIC;
@@ -2100,7 +2131,7 @@ begin
       Sync98ReadEn => Sync98ReadEn, -- inout std_logic;
       EvtReadEn => EvtReadEn, -- inout std_logic;
       CrateID  => CrateID(7 downto 0),
-      BoardID => "01001000",
+      BoardID => BoardID, -- "01001000",
       FiberLink => "0000000000000000",
       FiberEn => FiberEn(7 downto 0),
       TrgSyncOutEn => TrgSyncOutEn,
@@ -2182,8 +2213,10 @@ begin
       I2CRData => x"00000000", --I2CRData,
       ReadAOut => ReadAOut, --  in std_logic_vector(35 downto 0);
       ReadBOut => ReadBOut, -- in std_logic_vector(35 downto 0);
+      ClkFreq => ClkFreq, -- in (31:0),
       Clock => ClkReg, -- ClkPci
       Enable =>  RegisterR,
+      DlyRValid => m_axil_arvDLY, -- in std_logic;
       Address => RegReadAdd(8 downto 0)  );
 
 -- I2C and Jtag decoding (mmeory space seperation)
@@ -2278,6 +2311,7 @@ begin
     end if;
   end process;
 
+  BoardID <= RxAErrIn & Reset & ExtReset & TrgBufE(31) & TrgBufE(30) & TrgBufE(29) & DlyReady & ForcedClk;
   LEDG(0) <= (not (TrgBufE(31) and TrgBufE(30) and TrgBufE(29) and DlyReady and (LEDCounter(23) or (not ForcedClk)))); -- Red of LED_General_#1
   LEDG(9) <= (not (RxAErrIn or ExtReset or Reset));
 
@@ -2343,8 +2377,7 @@ begin
   LEDG(5) <= (not GENOUTX(9));
 
   GENOUTP(12 downto 9) <= LEDG(9) & LEDG(6) & LEDG(3) & LEDG(0); -- Same four LEDs as the TI
-  GENOUTP(16 downto 13) <= GENOUTX(14 downto 11);
-
+  GENOUTP(16 downto 13) <= GENOUTX(14 downto 12) & Clk625Mon;  -- replace GenOutX(11) with Clk625Mon  
 -- Busy counter and Live counter
   BoardActive <= TrgSrcEn(10) or TrgSrcEn(7) or TrgSrcEn(6) or TrgSrcEn(5)
               or TrgSrcEn(4) or TrgSrcEn(3) or TrgSrcEn(2) or TrgSrcEn(1);
@@ -2385,7 +2418,14 @@ begin
       end if;
     end if;
   end process;
-
-  TCSOut(10 downto 1) <= SReset(11) & SReset(9) & SReset(7) & SReset(5) & SReset(3) & SReset(2) & VmeReset(7) & Reset & Trig1 & IODlyRst;
-  TCSOut(16 downto 11) <= MasterMode(3 downto 1) & SReset(14 downto 12);
+  process (Clk625)
+  begin
+    if (Clk625'event and Clk625 = '1') then
+      Clk625Mon <= not Clk625Mon;
+    end if;
+  end process;
+--  TCSOut(10 downto 1) <= SReset(11) & SReset(9) & SReset(7) & SReset(5) & SReset(3) & SReset(2) & Status(7) & Reset & Trig1 & IODlyRst;
+  TCSOut(10 downto 1) <= SReset(11) & ClockSrc(7 downto 5) & SReset(3) & SReset(2) & Status(7) & Reset & Trig1 & VmeRst7RocAck; -- IODlyRst;
+--  TCSOut(16 downto 11) <= MasterMode(3 downto 1) & SReset(14 downto 12);
+  TCSOut(16 downto 11) <= MasterMode(3 downto 1) & VMEReset(7) & Status(10) & Status(8);
 end Behavioral;

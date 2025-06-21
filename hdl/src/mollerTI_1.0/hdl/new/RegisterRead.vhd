@@ -93,19 +93,27 @@ entity RegisterRead is
     RegE4SPI  : in std_logic_vector(31 downto 0);
     Clock : in std_logic;
     Enable : in std_logic;
+    DlyRValid : in std_logic;
     Address : in std_logic_vector(8 downto 0) );
 end RegisterRead;
 
 architecture RegisterRead_v of RegisterRead is
+
+  signal Sync98ReadEnInt : std_logic;
+  signal EvtReadEnInt : std_logic;
+
 begin
+  EvtReadEn <= EvtReadEnInt;
+  Sync98ReadEn <= Sync98ReadEnInt;
+
   process(Clock, Enable)
   begin
     if (Clock'event and Clock = '1') then
-      if (EvtReadEn = '1') then
-        EvtReadEn <= '0';
+      if (EvtReadEnInt = '1') then
+        EvtReadEnInt <= '0';
       end if;
-      if (Sync98ReadEn = '1') then
-        Sync98ReadEn <= '0';
+      if (Sync98ReadEnInt = '1') then
+        Sync98ReadEnInt <= '0';
       end if;
 
       if (Enable = '1') then
@@ -166,7 +174,7 @@ begin
           when "0011000" =>  O <= GtpPreScaleD(31 downto 0);
           when "0011001" =>  O <= ExtPreScaleA(31 downto 0);
           when "0011010" =>  O <= ExtPreScaleB(31 downto 0);
-                             EvtReadEn <= '1';
+                             EvtReadEnInt <= DlyRValid; -- '1';
           when "0011011" =>  O <= ExtPreScaleC(31 downto 0);
           when "0011100" =>  O <= ExtPreScaleD(31 downto 0);
           when "0011101" =>  O(31 downto 0) <= FPPreScale;
@@ -178,7 +186,7 @@ begin
           when "0100011" =>  O(31 downto 0) <= SoftTrg1;
           when "0100100" =>  O(31 downto 0) <= SoftTrg2;
           when "0100101" =>  O <= BlockAv(31 downto 0);  -- bit(31:24): number of events before the full block
-          when "0100110" =>  Sync98ReadEn <= '1';
+          when "0100110" =>  Sync98ReadEnInt <= DlyRValid; -- '1';
                              if (SyncData(36) = '1') then
                                O <= "00000000000000000000000000000000";
                              else  -- SyncData(37): empty from FIFO; SyncData(36): registered empty;
@@ -290,7 +298,7 @@ begin
                              O(15 downto 8) <= TIinfo(143 downto 136);
                              O(23 downto 16) <= TIinfo(215 downto 208);
                              O(31 downto 24) <= TIinfo(287 downto 280);
-          when others =>     O <= x"bad" & x"add" & x"31"; -- BadAddVR (4-bit Version, 4-bit revision) V1.5 on Dec. 7, 2021
+          when others =>     O <= x"bad" & x"add" & x"33"; -- BadAddVR (4-bit Version, 4-bit revision) V1.5 on Dec. 7, 2021
 --        when others =>     O <= "0111000111100010" & "1001000000011101"; -- 0x71E2_901d (gold) on Jan. 10, 2022
         end case;
       else

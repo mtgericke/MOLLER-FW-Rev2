@@ -485,7 +485,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>ca64b554</spirit:value>
+            <spirit:value>7f02ecd8</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -557,7 +557,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>6fc053fd</spirit:value>
+            <spirit:value>2a06cfdd</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1362,6 +1362,11 @@
         <spirit:userFileType>CELL_NAME_imp_tinode_wrapper/imp_TInode/BlockMemoryBuf/DataStorage/fifo8k72</spirit:userFileType>
       </spirit:file>
       <spirit:file>
+        <spirit:name>src/buf72to36/buf72to36.xci</spirit:name>
+        <spirit:userFileType>xci</spirit:userFileType>
+        <spirit:userFileType>CELL_NAME_imp_tinode_wrapper/imp_TInode/SingleWordReadBuf/DataStorage/buf72to36</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
         <spirit:name>src/TDCEvtFifo/TDCEvtFifo.xci</spirit:name>
         <spirit:userFileType>xci</spirit:userFileType>
         <spirit:userFileType>CELL_NAME_imp_tinode_wrapper/imp_TInode/ModDataGeneration/TDCEventFifo/TDCEvtFifo</spirit:userFileType>
@@ -1405,6 +1410,10 @@
         <spirit:name>src/TI1_x0y14/TI1_x0y14.xci</spirit:name>
         <spirit:userFileType>xci</spirit:userFileType>
         <spirit:userFileType>CELL_NAME_imp_tinode_wrapper/imp_TInode/TI1andLPBK_MGT/TI1_TRx0y14/TI1_x0y14</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>src/ClockFreqMeas.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
         <spirit:name>hdl/mollerTI_v1_0.v</spirit:name>
@@ -1541,6 +1550,11 @@
         <spirit:userFileType>CELL_NAME_imp_tinode_wrapper/imp_TInode/BlockMemoryBuf/DataStorage/fifo8k72</spirit:userFileType>
       </spirit:file>
       <spirit:file>
+        <spirit:name>src/buf72to36/buf72to36.xci</spirit:name>
+        <spirit:userFileType>xci</spirit:userFileType>
+        <spirit:userFileType>CELL_NAME_imp_tinode_wrapper/imp_TInode/SingleWordReadBuf/DataStorage/buf72to36</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
         <spirit:name>src/TDCEvtFifo/TDCEvtFifo.xci</spirit:name>
         <spirit:userFileType>xci</spirit:userFileType>
         <spirit:userFileType>CELL_NAME_imp_tinode_wrapper/imp_TInode/ModDataGeneration/TDCEventFifo/TDCEvtFifo</spirit:userFileType>
@@ -1586,10 +1600,6 @@
         <spirit:userFileType>CELL_NAME_imp_tinode_wrapper/imp_TInode/TI1andLPBK_MGT/TI1_TRx0y14/TI1_x0y14</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>src/buf72to36/buf72to36.xci</spirit:name>
-        <spirit:userFileType>xci</spirit:userFileType>
-      </spirit:file>
-      <spirit:file>
         <spirit:name>hdl/tinode_wrapper.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
@@ -1619,6 +1629,10 @@
       </spirit:file>
       <spirit:file>
         <spirit:name>hdl/new/ClockCheck.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>src/ClockFreqMeas.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
@@ -1975,8 +1989,8 @@
         <xilinx:xpmLibrary>XPM_FIFO</xilinx:xpmLibrary>
         <xilinx:xpmLibrary>XPM_MEMORY</xilinx:xpmLibrary>
       </xilinx:xpmLibraries>
-      <xilinx:coreRevision>18</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2024-02-26T22:32:02Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>33</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2024-10-14T16:58:10Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@2e87a91a_ARCHIVE_LOCATION">/home/xil/hdl/mollerTI/mollerTI_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@146fd17d_ARCHIVE_LOCATION">/home/xil/hdl/mollerTI/mollerTI_1.0</xilinx:tag>
@@ -2391,13 +2405,215 @@
         <xilinx:tag xilinx:name="ui.data.coregen.dd@4e7125be_ARCHIVE_LOCATION">/home/xil/hdl/src/mollerTI_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@6529193a_ARCHIVE_LOCATION">/home/xil/hdl/src/mollerTI_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@6e576963_ARCHIVE_LOCATION">/home/xil/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5d62746e_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@30363cd4_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@40647022_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@45c6500b_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@64c7db57_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2e107f6f_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@92eb041_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3e4d6b84_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@48ef3d78_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@14b0cb1e_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2681a0f6_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7d19de28_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7112316a_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@516a5e9d_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5a921780_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6859176e_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2f7d6f_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5336eef1_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4ab79f94_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7c783261_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6e50e733_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@776cc0e7_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@59b867c8_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6ecbf7bf_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4a7bf99e_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6eed98f1_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4ac23579_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@76bc9945_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3684c6bb_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@67c25bff_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4b7241ec_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3440a419_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@48193b22_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4689758f_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1714f245_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7e08dce1_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@77d857af_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7c05deae_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6dada1fd_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1ce7b5c6_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5a3d0c66_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5645054d_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@486c0a18_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2fc39d06_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@74c1492_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@b91eb_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1581f5dd_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@9c21535_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@536bc898_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@b828045_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@55d5d7fb_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@29fa4585_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@54f1c854_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@48e7ee3b_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@392369d0_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@74d039c5_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2e9d0a58_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@42a811d0_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2f57ccaf_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@203a19b1_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5f12ff13_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4f120806_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7ca0ebd0_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@789d38e7_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@504b33c_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6986f384_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6a8d8e18_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5bc5e878_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@40cca26d_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@36df267f_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4c3da7d5_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5616a6ce_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/MollerADC/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@c46c1d0_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@22c40a21_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@78eae8e9_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3e61646_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7e0d5c6_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@33a29bf3_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@d6bc1fc_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4bb50d87_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3743c73b_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1b1e2333_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@302d44c8_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@68dd04e1_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@70f045dd_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@21b9bb26_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@e4e6a44_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7f57b3dc_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@324ddf8b_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@b9f4f3a_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@f130a39_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@795c1113_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@307c1f46_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@60d760_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4e5c8508_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4b2d2d9_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@73cd9747_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@246095c6_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@324a0690_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@72e420eb_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@8375969_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@54e9952b_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@187ddfe8_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4ca6a439_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2c164a51_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6d8542ad_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@216440f9_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4ea7e94b_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@43274c1_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@aaafc74_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3a96836b_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@42566d92_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2e91a722_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3c068565_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2922a3a4_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6cb772d0_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@72b9bfe0_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4a7513a9_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4fb6f8e_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@22d4694b_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@43a8be74_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1055357f_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@11c4676b_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3de63775_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2ea14484_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6e96ff3_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@44608eb2_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@342597f8_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6267ca7e_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@650a9c9d_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@64825d09_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@23956383_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6c581ef3_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6bebb001_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4e944bbf_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@34d6538d_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@664ef334_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2c468a27_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@21547c19_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@8fadc39_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@22305d70_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@50f31d0c_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5cf44241_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@36e75691_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4edb43a3_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3654729c_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@47222a6d_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6ea67d0d_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@60796c0b_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4d3df098_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1af45ad2_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@66986d4a_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@666bc5c3_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@38c3200d_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7596a50_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7357eae6_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7813ba2_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6584ed2f_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1885d41f_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@10d4c1ca_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@630ccdcd_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@363ff61c_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@54badbc4_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2edcd14d_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5ef0568_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@ab05702_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5ab2eda1_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1b6de679_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3bda49f3_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@44cf15f4_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7148c3f5_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3e20d2f2_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@66f4f20_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@711f324b_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7b38cf11_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@23ad1c88_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@745629ea_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5c2d5a2_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4ffaf1d1_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6624dc2_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7ffb2993_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@205ded9f_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@32a0ed01_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6449e8bd_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3c1d6d82_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5345aa6a_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@579d1f6c_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7a0fbd0a_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@69009a45_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@8c0796e_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@55409ace_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@56731ea4_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@53a14d3f_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5b0001d_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2cb88f65_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@390acbc3_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@54549b00_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3c359f_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4cbc1e35_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@594c8072_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2757434c_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@19ebb07b_ARCHIVE_LOCATION">/home/jgu/fpga_vivado/molleradc/hdl/src/mollerTI_1.0</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2020.2</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="5a616e50"/>
       <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="c30980da"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="491f5172"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="812a45a6"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="da18cf78"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="f81bc771"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="0ee18ee1"/>
